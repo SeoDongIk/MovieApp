@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.example.movieapp.ui.theme.MovieAppTheme
 
 class DetailFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
