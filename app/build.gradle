@@ -37,14 +37,16 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+    kapt {
+        correctErrorTypes = true
+    }
     buildFeatures {
         buildConfig true
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.1'
+        kotlinCompilerExtensionVersion '1.5.7'
     }
-
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -76,7 +78,7 @@ dependencies {
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    implementation "androidx.hilt:hilt-navigation-fragment:1.0.0"
+    implementation "androidx.hilt:hilt-navigation-fragment:1.1.0"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Fragment
