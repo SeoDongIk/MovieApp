@@ -22,13 +22,14 @@ class FeedViewModel @Inject constructor(
     private val getFeedCategoryUseCase: IGetFeedCategoryUseCase
 ) : ViewModel(), IFeedViewModelOutput, IFeedViewModelInput {
 
-    // 화면에 보여주기 위한 Flow
+    val output: IFeedViewModelOutput = this
+    val input: IFeedViewModelInput = this
+
     private val _feedState: MutableStateFlow<FeedState> =
         MutableStateFlow(FeedState.Loading)
     override val feedState: StateFlow<FeedState>
         get() = _feedState
 
-    // 유저로부터 입력을 받아서 Fragment 단에서 액션을 수행하기 위한 Flow
     private val _feedUiEffect = MutableSharedFlow<FeedUiEffect>(replay = 0)
     override val feedUiEffect: SharedFlow<FeedUiEffect>
         get() = _feedUiEffect
@@ -59,11 +60,19 @@ class FeedViewModel @Inject constructor(
     }
 
     override fun openDetail(movieName: String) {
-        TODO("Not yet implemented")
+        viewModelScope.launch {
+            _feedUiEffect.emit(
+                FeedUiEffect.OpenMovieDetail(movieName)
+            )
+        }
     }
 
     override fun openInfoDialog() {
-        TODO("Not yet implemented")
+        viewModelScope.launch {
+            _feedUiEffect.emit(
+                FeedUiEffect.OpenInfoDialog
+            )
+        }
     }
 
     override fun refreshFeed() {
